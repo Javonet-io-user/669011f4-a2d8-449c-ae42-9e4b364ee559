@@ -1,0 +1,101 @@
+package Xceed.FileSystem;
+
+import Common.Activation;
+import static Common.JavonetHelper.Convert;
+import static Common.JavonetHelper.getGetObjectName;
+import static Common.JavonetHelper.getReturnObjectName;
+import static Common.JavonetHelper.ConvertToConcreteInterfaceImplementation;
+import Common.JavonetHelper;
+import Common.MethodTypeAnnotation;
+import com.javonet.Javonet;
+import com.javonet.JavonetException;
+import com.javonet.JavonetFramework;
+import com.javonet.api.NObject;
+import com.javonet.api.NEnum;
+import com.javonet.api.keywords.NRef;
+import com.javonet.api.keywords.NOut;
+import com.javonet.api.NControlContainer;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.Iterator;
+import java.lang.*;
+import Xceed.FileSystem.*;
+import jio.System.Collections.*;
+
+public class NameFilter extends Filter {
+  protected NObject javonetHandle;
+  /** GetProperty */
+  @MethodTypeAnnotation(type = "GetField")
+  public IEnumerable getMasks() {
+    try {
+      Object res = javonetHandle.<NObject>get("Masks");
+      if (res == null) return null;
+      return ConvertToConcreteInterfaceImplementation(res);
+    } catch (JavonetException _javonetException) {
+      _javonetException.printStackTrace();
+      return null;
+    }
+  }
+  /** GetProperty */
+
+  @MethodTypeAnnotation(type = "GetField")
+  public java.lang.Boolean getCaseSensitive() {
+    try {
+      java.lang.Boolean res = javonetHandle.get("CaseSensitive");
+      if (res == null) return false;
+      return res;
+    } catch (JavonetException _javonetException) {
+      _javonetException.printStackTrace();
+      return false;
+    }
+  }
+
+  public NameFilter(java.lang.String mask) {
+    super((NObject) null);
+    try {
+      javonetHandle = Javonet.New("Xceed.FileSystem.NameFilter", mask);
+      super.setJavonetHandle(javonetHandle);
+    } catch (JavonetException _javonetException) {
+      _javonetException.printStackTrace();
+    }
+  }
+
+  public NameFilter(java.lang.String mask, FilterScope scope) {
+    super((NObject) null);
+    try {
+      javonetHandle = Javonet.New("Xceed.FileSystem.NameFilter", mask, NEnum.fromJavaEnum(scope));
+      super.setJavonetHandle(javonetHandle);
+    } catch (JavonetException _javonetException) {
+      _javonetException.printStackTrace();
+    }
+  }
+
+  public NameFilter(NObject handle) {
+    super(handle);
+    this.javonetHandle = handle;
+  }
+
+  public void setJavonetHandle(NObject handle) {
+    this.javonetHandle = handle;
+  }
+  /** Method */
+
+  @MethodTypeAnnotation(type = "Method")
+  public java.lang.Boolean NameFilter___IsItemMatching(FileSystemItem item) {
+    try {
+      java.lang.Boolean res = javonetHandle.invoke("IsItemMatching", item);
+      if (res == null) return false;
+      return res;
+    } catch (JavonetException _javonetException) {
+      _javonetException.printStackTrace();
+      return false;
+    }
+  }
+
+  static {
+    try {
+      Activation.initializeJavonet();
+    } catch (java.lang.Exception e) {
+      e.printStackTrace();
+    }
+  }
+}
